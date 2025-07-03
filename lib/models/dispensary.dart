@@ -8,7 +8,6 @@ class Dispensary {
   final String imageUrl;
   final double rating;
   final List<String> specialties;
-  final double distance; // Distance from user's location
 
   Dispensary({
     required this.id,
@@ -20,7 +19,6 @@ class Dispensary {
     required this.imageUrl,
     required this.rating,
     required this.specialties,
-    this.distance = 0.0,
   });
 
   factory Dispensary.fromJson(Map<String, dynamic> json) {
@@ -34,7 +32,6 @@ class Dispensary {
       imageUrl: json['imageUrl'],
       rating: json['rating'].toDouble(),
       specialties: List<String>.from(json['specialties']),
-      distance: json['distance']?.toDouble() ?? 0.0,
     );
   }
 
@@ -49,7 +46,6 @@ class Dispensary {
       'imageUrl': imageUrl,
       'rating': rating,
       'specialties': specialties,
-      'distance': distance,
     };
   }
 } 

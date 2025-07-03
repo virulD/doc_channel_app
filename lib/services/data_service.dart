@@ -1,7 +1,6 @@
 import '../models/dispensary.dart';
 import '../models/doctor.dart';
 import '../models/appointment.dart';
-import 'location_service.dart';
 
 class DataService {
   static final List<Dispensary> _dispensaries = getMockDispensaries();
@@ -130,38 +129,6 @@ class DataService {
   }
 
   static Future<List<Dispensary>> getNearbyDispensaries() async {
-    if (_dispensaries.isNotEmpty) {
-      // Get user's current location
-      var userLocation = await LocationService.getCurrentLocation();
-      
-      if (userLocation != null) {
-        // Calculate distances and sort by nearest
-        for (var dispensary in _dispensaries) {
-          double distance = LocationService.calculateDistance(
-            userLocation.latitude,
-            userLocation.longitude,
-            dispensary.latitude,
-            dispensary.longitude,
-          );
-          dispensary = Dispensary(
-            id: dispensary.id,
-            name: dispensary.name,
-            address: dispensary.address,
-            latitude: dispensary.latitude,
-            longitude: dispensary.longitude,
-            phone: dispensary.phone,
-            imageUrl: dispensary.imageUrl,
-            rating: dispensary.rating,
-            specialties: dispensary.specialties,
-            distance: distance,
-          );
-        }
-        
-        // Sort by distance
-        _dispensaries.sort((a, b) => a.distance.compareTo(b.distance));
-      }
-    }
-    
     return _dispensaries;
   }
 

@@ -5,6 +5,7 @@ import '../models/doctor.dart';
 import '../models/appointment.dart';
 import '../services/data_service.dart';
 import 'appointment_confirmation_screen.dart';
+import '../services/appointment_api_service.dart';
 
 class AppointmentBookingScreen extends StatefulWidget {
   final Dispensary dispensary;
@@ -27,6 +28,7 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
   final _addressController = TextEditingController();
+  final _symptomsController = TextEditingController();
 
   String _selectedDate = '';
   String _selectedTimeSlot = '';
@@ -463,8 +465,31 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
         address: _addressController.text,
       );
 
+      // Build appointment data map for backend
+      final appointmentData = {
+        "patientId": DateTime.now().millisecondsSinceEpoch.toString(),
+        "doctorId": widget.doctor.id,
+        "dispensaryId": widget.dispensary.id,
+        "bookingDate": _selectedDate,
+        "timeSlot": _selectedTimeSlot,
+        "appointmentNumber": 1, // You may want to generate this properly
+        "estimatedTime": _selectedTimeSlot.split('-').first,
+        "status": "scheduled",
+        "symptoms": _symptomsController.text,
+        "isPaid": false,
+        "isPatientVisited": false,
+        "patientName": _nameController.text,
+        "patientPhone": _phoneController.text,
+        "patientEmail": _emailController.text,
+        "createdAt": DateTime.now().toIso8601String(),
+        "updatedAt": DateTime.now().toIso8601String(),
+      };
+
+      // Send to backend
+      await AppointmentApiService.saveAppointment(appointmentData);
+
       Appointment appointment = await DataService.bookAppointment(
-        userId: DateTime.now().millisecondsSinceEpoch.toString(),
+        userId: appointmentData["patientId"].toString(),
         doctorId: widget.doctor.id,
         dispensaryId: widget.dispensary.id,
         date: _selectedDate,

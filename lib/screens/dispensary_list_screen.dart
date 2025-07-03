@@ -413,29 +413,6 @@ class _DispensaryCard extends StatelessWidget {
                       );
                     }).toList(),
                   ),
-                  
-                  if (dispensary.distance > 0) ...[
-                    const SizedBox(height: 12),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.directions_walk,
-                          size: 16,
-                          color: Color(0xFF42A5F5),
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          '${(dispensary.distance / 1000).toStringAsFixed(1)} km away',
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: Color(0xFF42A5F5),
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'Poppins',
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
                 ],
               ),
             ),

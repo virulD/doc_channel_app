@@ -43,17 +43,23 @@
 //     source = "../.."
 // }
 
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+// apply plugin: 'com.android.application'
+// apply plugin: 'kotlin-android'
+
+   plugins {
+       id 'com.android.application'
+       id 'kotlin-android'
+       id 'dev.flutter.flutter-gradle-plugin'
+   }
 
 android {
     namespace "com.example.doc_channel_app" 
-    compileSdkVersion 33
+    compileSdkVersion 35
 
     defaultConfig {
         applicationId "com.example.doc_channel_app"
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 35
         versionCode 1
         versionName "1.0"
 
@@ -62,7 +68,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "D:/Work/doc_channel_app/linux"
+    "cmake.sourceDirectory": "D:/Work/doc_channel_app/linux",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
