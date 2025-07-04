@@ -30,3 +30,10 @@ jobs:
         with:
           name: app-release.apk
           path: build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+    
